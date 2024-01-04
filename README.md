@@ -1,5 +1,5 @@
 # match-website
-## visit :- [Match]( https://match-all.github.io/Match/)
+## visit :- [Match]()
 # Introduaction
 ## Match WebPage Logo
 
@@ -7,7 +7,7 @@
 
 ![logo](./images/match%20Logo/Match%201.png)
 
-[!logo](./images/match%20Logo/Match%201.png)(https://match-all.github.io/Match/#)
+[!logo](./images/match%20Logo/Match%201.png)()
 
 # Latest Release: v0.0.0.1 september 01, 2023
 
