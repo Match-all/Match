@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            background-color: #000;
+            color: #fff;
+        }
+
+        #editor-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        #code-input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            background-color: #000;
+            color: #fff;
+        }
+
+        #code-output {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            background-color: #333;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div id="editor-container">
+    <textarea id="code-input" placeholder="Enter HTML, CSS, and JS code here..." spellcheck="false"></textarea>
+    <iframe id="code-output"></iframe>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-html.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+<script>
+    const codeInput = document.getElementById('code-input');
+    const codeOutput = document.getElementById('code-output');
+
+    codeInput.addEventListener('input', updateCode);
+
+    function updateCode() {
+        const code = codeInput.value;
+
+        // Update the output iframe
+        codeOutput.contentDocument.body.innerHTML = code;
+
+        // Apply syntax highlighting using Prism.js
+        Prism.highlightAll();
+    }
+
+    // Initial syntax highlighting on page load
+    Prism.highlightAll();
+</script>
+
+</body>
+</html>
