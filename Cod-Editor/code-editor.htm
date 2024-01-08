@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Editor</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
     <style>
         body {
             margin: 0;
             font-family: 'Courier New', monospace;
-            background-color: #000;
-            color: #fff;
         }
 
         #editor-container {
@@ -24,8 +21,7 @@
             font-size: 16px;
             border: none;
             outline: none;
-            background-color: #000;
-            color: #fff;
+            background-color: #f8f8f8;
         }
 
         #code-output {
@@ -34,22 +30,22 @@
             font-size: 16px;
             border: none;
             outline: none;
-            background-color: #333;
+            background-color: #f0f0f0;
             overflow-y: auto;
+        }
+
+        textarea {
+            background-color: black;
         }
     </style>
 </head>
 <body>
 
 <div id="editor-container">
-    <textarea id="code-input" placeholder="Enter HTML, CSS, and JS code here..." spellcheck="false"></textarea>
+    <textarea id="code-input" placeholder="Enter HTML, CSS, and JS code here..."></textarea>
     <iframe id="code-output"></iframe>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-html.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-css.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
 <script>
     const codeInput = document.getElementById('code-input');
     const codeOutput = document.getElementById('code-output');
@@ -57,17 +53,19 @@
     codeInput.addEventListener('input', updateCode);
 
     function updateCode() {
-        const code = codeInput.value;
+        const html = codeInput.value;
 
-        // Update the output iframe
-        codeOutput.contentDocument.body.innerHTML = code;
+        // Clear the output iframe
+        codeOutput.srcdoc = '';
 
-        // Apply syntax highlighting using Prism.js
-        Prism.highlightAll();
+        // Create a new document in the iframe
+        const iframeDocument = codeOutput.contentDocument || codeOutput.contentWindow.document;
+
+        // Write the HTML content to the iframe
+        iframeDocument.open();
+        iframeDocument.write(html);
+        iframeDocument.close();
     }
-
-    // Initial syntax highlighting on page load
-    Prism.highlightAll();
 </script>
 
 </body>
